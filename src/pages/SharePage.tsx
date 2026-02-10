@@ -6,22 +6,6 @@ import html2canvas from "html2canvas";
 import { Download, Camera, X, Sparkles } from "lucide-react";
 import { decodeShareData, encodeShareData } from "@/lib/shareData";
 
-// Shorten URL using TinyURL
-async function shortenUrl(longUrl: string) {
-  try {
-    const response = await fetch(
-      `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`
-    );
-
-    const shortUrl = await response.text();
-    return shortUrl;
-  } catch (error) {
-    console.error("URL shortening failed:", error);
-    // fallback -> return original link
-    return longUrl;
-  }
-}
-
 const ShareCaptureTemplate = ({ name, captureRef }: { name: string; captureRef: React.RefObject<HTMLDivElement> }) => {
   return (
     <div className="fixed -left-[2000px] top-0 pointer-events-none">
@@ -90,10 +74,20 @@ const ShareCaptureTemplate = ({ name, captureRef }: { name: string; captureRef: 
   );
 };
 
+const ROMANTIC_SLUGS = [
+  "stay-with-me",
+  "i-love-you",
+  "be-my-valentine",
+  "forever-yours",
+  "always-and-forever",
+  "you-are-special",
+  "my-heart-belongs-to-you"
+];
+
 const SharePage = () => {
   const [searchParams] = useSearchParams();
-  const dataParam = searchParams.get("data") || "";
-  const decoded = decodeShareData(dataParam);
+  const dParam = searchParams.get("d") || "";
+  const decoded = decodeShareData(dParam);
   const name = decoded?.name || "";
   const msg = decoded?.message || "";
   const navigate = useNavigate();
@@ -101,22 +95,17 @@ const SharePage = () => {
   const cardRef = useRef<HTMLDivElement>(null);
   const captureRef = useRef<HTMLDivElement>(null);
 
+  // Pick a random slug for the link
+  const slug = useRef(ROMANTIC_SLUGS[Math.floor(Math.random() * ROMANTIC_SLUGS.length)]);
+
   const params = new URLSearchParams({
-    data: dataParam || encodeShareData({ name, message: msg }),
+    d: dParam || encodeShareData({ name, message: msg }),
   });
-  const link = `${window.location.origin}/valentine?${params.toString()}`;
+  const link = `${window.location.origin}/valentine/${slug.current}?${params.toString()}`;
   const [shortLink, setShortLink] = useState(link);
 
   useEffect(() => {
-    let cancelled = false;
-    const run = async () => {
-      const shortened = await shortenUrl(link);
-      if (!cancelled) setShortLink(shortened);
-    };
-    run();
-    return () => {
-      cancelled = true;
-    };
+    setShortLink(link);
   }, [link]);
 
   const [copied, setCopied] = useState(false);
@@ -264,7 +253,7 @@ const SharePage = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => navigate(`/valentine?${params.toString()}`)}
+            onClick={() => navigate(`/valentine/${slug.current}?${params.toString()}`)}
             className="w-full py-3 rounded-xl bg-white/60 text-primary font-bold border border-white/60
               hover:bg-white/80 transition-all mt-2"
           >

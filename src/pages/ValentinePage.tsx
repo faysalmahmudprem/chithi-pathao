@@ -30,8 +30,8 @@ const ENGLISH_POEMS = [
 
 const ValentinePage = () => {
   const [searchParams] = useSearchParams();
-  const dataParam = searchParams.get("data") || "";
-  const decoded = decodeShareData(dataParam);
+  const dParam = searchParams.get("d") || "";
+  const decoded = decodeShareData(dParam);
   const fallbackName = searchParams.get("to") || "Someone Special";
   const fallbackMessage = searchParams.get("msg") || "";
   const recipientName = decoded?.name || fallbackName;
