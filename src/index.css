@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Galada&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 350 100% 98%;
+    --foreground: 355 40% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 355 40% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 355 40% 20%;
+
+    --primary: 345 90% 65%;
+    --primary-foreground: 350 100% 98%;
+
+    --secondary: 340 70% 94%;
+    --secondary-foreground: 345 60% 40%;
+
+    --muted: 340 40% 96%;
+    --muted-foreground: 345 20% 50%;
+
+    --accent: 335 90% 70%;
+    --accent-foreground: 350 100% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 340 30% 90%;
+    --input: 340 30% 90%;
+    --ring: 345 90% 65%;
+
+    --radius: 1.5rem;
+
+    --valentine-pink: 345 90% 65%;
+    --valentine-rose: 335 90% 70%;
+    --valentine-blush: 340 100% 97%;
+    --valentine-deep: 355 40% 20%;
+    --valentine-glow: 345 100% 80%;
+
+    --gradient-romantic: linear-gradient(135deg, hsl(350, 100%, 97%) 0%, hsl(340, 60%, 96%) 50%, hsl(335, 100%, 94%) 100%);
+    --gradient-button: linear-gradient(135deg, hsl(345, 90%, 65%) 0%, hsl(335, 90%, 60%) 100%);
+    --gradient-card: linear-gradient(145deg, hsla(0, 0%, 100%, 0.7), hsla(340, 40%, 98%, 0.4));
+
+    --font-display: 'Dancing Script', 'Galada', cursive;
+    --font-body: 'Quicksand', 'Hind Siliguri', sans-serif;
+  }
+
+  .dark {
+    --background: 345 40% 10%;
+    --foreground: 350 100% 98%;
+    --card: 345 40% 15%;
+    --card-foreground: 350 100% 98%;
+    --primary: 345 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 345 30% 20%;
+    --muted-foreground: 345 20% 70%;
+    --valentine-pink: 345 80% 60%;
+    --valentine-rose: 335 80% 50%;
+    --gradient-romantic: linear-gradient(135deg, hsl(345, 40%, 15%) 0%, hsl(345, 50%, 10%) 100%);
+    --gradient-card: linear-gradient(145deg, hsla(345, 40%, 20%, 0.8), hsla(345, 40%, 15%, 0.6));
+    --border: 345 30% 25%;
+    --input: 345 30% 25%;
+  }
+
+  .cute {
+    --background: 200 100% 97%;
+    --foreground: 200 60% 30%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 60% 30%;
+    --primary: 190 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 200 50% 95%;
+    --muted-foreground: 200 30% 60%;
+    --valentine-pink: 190 80% 60%;
+    --valentine-rose: 220 80% 70%;
+    --gradient-romantic: linear-gradient(135deg, hsl(200, 100%, 97%) 0%, hsl(210, 80%, 95%) 100%);
+    --gradient-card: linear-gradient(145deg, hsla(0, 0%, 100%, 0.9), hsla(200, 60%, 98%, 0.8));
+     --border: 200 40% 90%;
+    --input: 200 40% 90%;
+  }
+
+  .elegant {
+    --background: 45 20% 98%;
+    --foreground: 45 40% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 45 40% 15%;
+    --primary: 45 60% 50%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 45 20% 94%;
+    --muted-foreground: 45 10% 50%;
+    --valentine-pink: 45 60% 50%;
+    --valentine-rose: 35 60% 60%;
+    --gradient-romantic: linear-gradient(135deg, hsl(45, 30%, 97%) 0%, hsl(40, 30%, 95%) 100%);
+    --gradient-card: linear-gradient(145deg, hsla(0, 0%, 100%, 0.95), hsla(45, 20%, 96%, 0.9));
+     --border: 45 20% 85%;
+    --input: 45 20% 85%;
+    --font-display: 'Playfair Display', serif; /* Override font for elegance */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: var(--font-body);
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(335,90%,90%,0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(345,90%,90%,0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(335,90%,90%,0.3) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(345,90%,90%,0.3) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .gradient-romantic {
+    background: var(--gradient-romantic);
+  }
+
+  .gradient-button {
+    background: var(--gradient-button);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--valentine-glow) / 0.4);
+  }
+
+  .card-valentine {
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px hsl(var(--valentine-pink) / 0.2),
+                0 0 0 1px hsl(var(--valentine-pink) / 0.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(1); }
+}
+
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.animate-float { animation: float 6s infinite ease-in-out; }
+.animate-heartbeat { animation: heartbeat 1.5s infinite; }
+.animate-petal-fall { animation: petal-fall linear infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+.animate-wiggle { animation: wiggle 0.5s ease-in-out; }
