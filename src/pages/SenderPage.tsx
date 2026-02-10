@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
+import { encodeShareData } from "@/lib/shareData";
 
 const SenderPage = () => {
   const [name, setName] = useState("");
@@ -10,10 +11,12 @@ const SenderPage = () => {
 
   const handleGenerate = () => {
     if (!name.trim()) return;
-    const params = new URLSearchParams({ to: name.trim() });
-    if (message.trim()) {
-      params.set("msg", message.trim());
-    }
+    const params = new URLSearchParams({
+      data: encodeShareData({
+        name: name.trim(),
+        message: message.trim(),
+      }),
+    });
     navigate(`/share?${params.toString()}`);
   };
 

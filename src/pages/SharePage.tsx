@@ -1,9 +1,26 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
 import html2canvas from "html2canvas";
 import { Download, Camera, X, Sparkles } from "lucide-react";
+import { decodeShareData, encodeShareData } from "@/lib/shareData";
+
+// Shorten URL using TinyURL
+async function shortenUrl(longUrl: string) {
+  try {
+    const response = await fetch(
+      `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`
+    );
+
+    const shortUrl = await response.text();
+    return shortUrl;
+  } catch (error) {
+    console.error("URL shortening failed:", error);
+    // fallback -> return original link
+    return longUrl;
+  }
+}
 
 const ShareCaptureTemplate = ({ name, captureRef }: { name: string; captureRef: React.RefObject<HTMLDivElement> }) => {
   return (
@@ -75,22 +92,38 @@ const ShareCaptureTemplate = ({ name, captureRef }: { name: string; captureRef: 
 
 const SharePage = () => {
   const [searchParams] = useSearchParams();
-  const name = searchParams.get("to") || "";
-  const msg = searchParams.get("msg") || "";
+  const dataParam = searchParams.get("data") || "";
+  const decoded = decodeShareData(dataParam);
+  const name = decoded?.name || "";
+  const msg = decoded?.message || "";
   const navigate = useNavigate();
   const [showGuide, setShowGuide] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const captureRef = useRef<HTMLDivElement>(null);
 
-  const params = new URLSearchParams({ to: name });
-  if (msg) params.set("msg", msg);
+  const params = new URLSearchParams({
+    data: dataParam || encodeShareData({ name, message: msg }),
+  });
   const link = `${window.location.origin}/valentine?${params.toString()}`;
+  const [shortLink, setShortLink] = useState(link);
+
+  useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      const shortened = await shortenUrl(link);
+      if (!cancelled) setShortLink(shortened);
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [link]);
 
   const [copied, setCopied] = useState(false);
   const handleCopy = async () => {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(link);
+        await navigator.clipboard.writeText(shortLink);
         setCopied(true);
       } else {
         throw new Error("Clipboard API unavailable");
@@ -98,7 +131,7 @@ const SharePage = () => {
     } catch (err) {
       // Fallback for non-secure contexts or older mobile browsers
       const textArea = document.createElement("textarea");
-      textArea.value = link;
+      textArea.value = shortLink;
       textArea.style.position = "fixed";
       textArea.style.left = "-9999px";
       textArea.style.top = "0";
@@ -118,7 +151,7 @@ const SharePage = () => {
 
   const handleWhatsApp = () => {
     window.open(
-      `https://wa.me/?text=${encodeURIComponent(`Hey ${name}! I have something special for you 💝\n${link}`)}`,
+      `https://wa.me/?text=${encodeURIComponent(`Hey ${name}! I have something special for you 💝\n${shortLink}`)}`,
       "_blank"
     );
   };
@@ -179,7 +212,7 @@ const SharePage = () => {
         </p>
 
         <div className="bg-white/40 backdrop-blur-sm rounded-xl p-4 mb-6 break-all text-sm text-primary/80 font-mono border border-white/50 shadow-inner">
-          {link}
+          {shortLink}
         </div>
 
         <div className="space-y-3">

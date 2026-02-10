@@ -5,6 +5,7 @@ import FloatingHearts from "@/components/FloatingHearts";
 import ValentineResult from "@/components/ValentineResult";
 import AudioPlayer from "@/components/AudioPlayer";
 import { playHappySound, playWhooshSound } from "@/lib/sounds";
+import { decodeShareData } from "@/lib/shareData";
 
 const CAT_ASKING_GIF = "/media/asking.gif";
 
@@ -29,8 +30,12 @@ const ENGLISH_POEMS = [
 
 const ValentinePage = () => {
   const [searchParams] = useSearchParams();
-  const recipientName = searchParams.get("to") || "Someone Special";
-  const customMessage = searchParams.get("msg") || "";
+  const dataParam = searchParams.get("data") || "";
+  const decoded = decodeShareData(dataParam);
+  const fallbackName = searchParams.get("to") || "Someone Special";
+  const fallbackMessage = searchParams.get("msg") || "";
+  const recipientName = decoded?.name || fallbackName;
+  const customMessage = decoded?.message || fallbackMessage;
   const [answer, setAnswer] = useState<"yes" | "no" | "heartbreak" | null>(null);
   const [noCount, setNoCount] = useState(0);
   const [gifLoaded, setGifLoaded] = useState(false);
