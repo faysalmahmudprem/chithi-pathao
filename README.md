@@ -1,24 +1,38 @@
-# ChithiPathao - Send personalized messages with a shareable link
+# 💌 ChithiPathao - Send personalized messages with a shareable link
 
-ChithiPathao is a lightweight web app to create a personalized message, generate a shareable link, and capture a result image. Built with React, Vite, and Tailwind CSS.
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white)
 
-## Features
+**ChithiPathao** (চিঠি পাঠাও) is a modern, lightweight web application designed to help people express emotions in a beautiful and interactive way. Create a personalized message, generate a unique link, and share it with your special someone!
 
-- **Personalized Links**: Add a name and a custom message for the recipient.
-- **Interactive Responses**: Playful UI interactions for "Yes/No" flows.
-- **Audio Experience**: Optional background music and sound effects.
-- **Social Sharing**: Share results on WhatsApp or Instagram.
-- **Result Saving**: Download a high-quality PNG or use the guided screenshot mode.
-- **Local Stats**: Track views and interactions in local storage.
+[Live Demo](https://chithipathao.netlify.app/) | [How to Use](HOW_TO_USE.md)
 
-## Tech Stack
+---
 
-- **Framework**: React + Vite
+## ✨ Features
+
+- 🪄 **Personalized Links**: Add a name and a custom message for the recipient.
+- 🎮 **Interactive Responses**: Playful UI interactions (escaping "No" button) for "Yes/No" flows.
+- 🎵 **Audio Experience**: Optional background music and sound effects to set the mood.
+- 📲 **Social Sharing**: One-click sharing via WhatsApp, Messenger, or Instagram.
+- 📸 **Result Saving**: Download high-quality PNG of the special moment using `html2canvas`.
+- 📊 **Local Stats**: Track views and interactions directly in your browser.
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React + TypeScript (Vite)
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Canvas**: html2canvas (result image capture)
+- **Utility**: html2canvas
 
+## 🚀 Getting Started
+
+1. **Clone the project**:
+   ```bash
+   git clone [https://github.com/yourusername/chithipathao.git](https://github.com/yourusername/chithipathao.git)
 ## Getting Started
 
 1. **Install Dependencies**:
@@ -47,7 +61,6 @@ ChithiPathao is a lightweight web app to create a personalized message, generate
 ## Configuration
 
 - **Site URL**: `https://chithipathao.netlify.com/`
-- **Meta Tags**: Update `index.html` for title, description, and social previews.
 
 ## Usage
 
