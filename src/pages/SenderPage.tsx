@@ -12,7 +12,7 @@ const SenderPage = () => {
   const handleGenerate = () => {
     if (!name.trim()) return;
     const params = new URLSearchParams({
-      data: encodeShareData({
+      d: encodeShareData({
         name: name.trim(),
         message: message.trim(),
       }),
