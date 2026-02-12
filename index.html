@@ -3,38 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChithiPathao - Send personalized messages with a shareable link.</title>
-    <meta name="description" content="ChithiPathao lets you send personalized messages with a shareable link for someone special." />
+    <title>
+      ChithiPathao - Send personalized messages with a shareable link.
+    </title>
+    <meta
+      name="description"
+      content="ChithiPathao lets you send personalized messages with a shareable link for someone special."
+    />
     <meta name="author" content="Faysal Mahmud Prem" />
-    <meta name="keywords" content="personalized message, shareable link, love letter, greeting, surprise, message sharing" />
+    <meta
+      name="keywords"
+      content="personalized message, shareable link, love letter, greeting, surprise, message sharing"
+    />
     <link rel="canonical" href="https://chithipathao.netlify.com/" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <meta property="og:title" content="ChithiPathao - Send personalized messages with a shareable link." />
-    <meta property="og:description" content="Send a personalized message with a shareable link using ChithiPathao." />
+    <meta
+      property="og:title"
+      content="ChithiPathao - Send personalized messages with a shareable link."
+    />
+    <meta
+      property="og:description"
+      content="Send a personalized message with a shareable link using ChithiPathao."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chithipathao.netlify.com/" />
-    <meta property="og:image" content="https://chithipathao.netlify.com/media/placeholder.svg" />
+    <meta
+      property="og:image"
+      content="https://chithipathao.netlify.com/media/placeholder.svg"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ChithiPathao - Send personalized messages with a shareable link." />
-    <meta name="twitter:description" content="Send a personalized message with a shareable link using ChithiPathao." />
-    <meta name="twitter:image" content="https://chithipathao.netlify.com/media/placeholder.svg" />
+    <meta
+      name="twitter:title"
+      content="ChithiPathao - Send personalized messages with a shareable link."
+    />
+    <meta
+      name="twitter:description"
+      content="Send a personalized message with a shareable link using ChithiPathao."
+    />
+    <meta
+      name="twitter:image"
+      content="https://chithipathao.netlify.com/media/placeholder.svg"
+    />
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ChithiPathao",
-      "description": "Send personalized messages with a shareable link.",
-      "url": "https://chithipathao.netlify.com",
-      "applicationCategory": "Entertainment"
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ChithiPathao",
+        "description": "Send personalized messages with a shareable link.",
+        "url": "https://chithipathao.netlify.com",
+        "applicationCategory": "Entertainment"
+      }
     </script>
+
+    <link rel="stylesheet" href="/welcome-modal.css" />
   </head>
 
   <body>
     <div id="root"></div>
+
+    <div
+      id="cpWelcomeModal"
+      class="cp-modal-overlay"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cpWelcomeTitle"
+    >
+      <div class="cp-modal-card">
+        <div class="cp-modal-header">
+          <h2 id="cpWelcomeTitle">&#x1F48C; Welcome to ChithiPathao!</h2>
+          <button
+            class="cp-close-btn"
+            type="button"
+            aria-label="Close popup"
+            data-close-welcome
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="cp-modal-content">
+          <p class="cp-intro">
+            প্রিয় কাউকে সারপ্রাইজ মেসেজ পাঠিয়ে দিন 🕊️
+          </p>
+
+          <h3>কীভাবে কাজ করে:</h3>
+          <ol>
+            <li>আপনার মেসেজ লিখুন</li>
+            <li>ইউনিক লিংক তৈরি করুন</li>
+            <li>বন্ধু বা ক্রাশকে লিংক শেয়ার করুন</li>
+            <li>লিংক খুললেই সারপ্রাইজ মেসেজ দেখবে</li>
+          </ol>
+        </div>
+
+        <div class="cp-modal-footer">
+          <p class="cp-note">No login. No data stored.&#x1F60A;</p>
+          <p class="cp-footer">
+            Developed 💻 by Faysal Mahmud Prem
+          </p>
+          <button class="cp-gotit-btn" type="button" data-close-welcome>
+            Got it
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/welcome-modal.js" defer></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
