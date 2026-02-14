@@ -17,6 +17,11 @@ const SenderPage = () => {
         message: message.trim(),
       }),
     });
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "link_generated", {
+        event_category: "engagement",
+      });
+    }
     navigate(`/share?${params.toString()}`);
   };
 

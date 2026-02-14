@@ -52,6 +52,12 @@ const ValentinePage = () => {
     localStorage.setItem("valentine_views", (views + 1).toString());
   }, []);
 
+  useEffect(() => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "message_viewed");
+    }
+  }, []);
+
   // Yes button scale logic (adds 0.15 each time, caps at 2.5)
   const yesScale = Math.min(1 + noCount * 0.15, 2.5);
 
